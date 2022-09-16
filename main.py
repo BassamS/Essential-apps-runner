@@ -1,9 +1,6 @@
-# from cProfile import label
-# from cgitb import grey
 import tkinter as tk
 from tkinter import Canvas, filedialog, Text
 import os
-from turtle import pd
 
 root = tk.Tk()
 apps = []
@@ -51,3 +48,8 @@ run_apps = tk.Button(root, text="Run Apps", padx=10,
 run_apps.pack()
 
 root.mainloop()
+
+# Saving the selected apps
+with open('save.txt', 'w') as f:
+    for app in apps:
+        f.write(app + ',')
