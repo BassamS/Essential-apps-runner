@@ -1,9 +1,33 @@
+# from cProfile import label
+# from cgitb import grey
 import tkinter as tk
 from tkinter import Canvas, filedialog, Text
 import os
 from turtle import pd
 
 root = tk.Tk()
+apps = []
+
+
+def add_app():
+
+    for widget in frame.winfo_children():
+        widget.destroy()
+
+    filename = filedialog.askopenfilename(initialdir="/", title="Select File",
+                                          filetypes=(("executables", "*.exe"), ("all files", "*.*")))
+    apps.append(filename)
+    print(filename)
+
+    for app in apps:
+        label = tk.Label(frame, text=app, bg="grey")
+        label.pack()
+
+
+def run_apps():
+    for app in apps:
+        os.startfile(app)
+
 
 # Box size and color
 canvas = tk.Canvas(root, height=400, width=400, bg="#263D42")
@@ -15,13 +39,13 @@ frame.place(relwidth=0.8, relheight=0.8, relx=0.1, rely=0.1)
 
 # Buttons
 open_file = tk.Button(root, text="Open File", padx=10,
-                      pady=5, fg="white", bg="#263D42")
+                      pady=5, fg="white", bg="#263D42", command=add_app)
 
 # Showing the button
 open_file.pack()
 
 run_apps = tk.Button(root, text="Run Apps", padx=10,
-                     pady=5, fg="white", bg="#263D42")
+                     pady=5, fg="white", bg="#263D42", command=run_apps)
 
 # Showing the button
 run_apps.pack()
