@@ -1,9 +1,16 @@
+from genericpath import isfile
 import tkinter as tk
 from tkinter import Canvas, filedialog, Text
 import os
 
 root = tk.Tk()
 apps = []
+
+if os.path.isfile('save.txt'):
+    with open('save.txt', 'r') as f:
+        temp_apps = f.read()
+        temp_apps = temp_apps.split(',')
+        apps = [x for x in temp_apps if x.strip()]
 
 
 def add_app():
@@ -46,6 +53,10 @@ run_apps = tk.Button(root, text="Run Apps", padx=10,
 
 # Showing the button
 run_apps.pack()
+
+for app in apps:
+    label = tk.Label(frame, text=app)
+    label.pack()
 
 root.mainloop()
 
